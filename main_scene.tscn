@@ -1,48 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsm3hbw75h5ty"]
+[gd_scene load_steps=4 format=3 uid="uid://bsm3hbw75h5ty"]
 
 [ext_resource type="Shader" path="res://RocketEffect.gdshader" id="1_p0thj"]
 [ext_resource type="Texture2D" uid="uid://doaq5aje84o8g" path="res://icon.svg" id="2_subrq"]
 
-[sub_resource type="Environment" id="Environment_5mwe5"]
-background_mode = 3
-glow_enabled = true
-glow_intensity = 1.39
-glow_bloom = 0.08
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_fqbay"]
-noise_type = 3
-seed = 3
-frequency = 0.0158
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2utrf"]
-seamless = true
-noise = SubResource("FastNoiseLite_fqbay")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ifxwu"]
-seed = 6
-frequency = 0.0133
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f2hsi"]
-seamless = true
-noise = SubResource("FastNoiseLite_ifxwu")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hyv84"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ccllo"]
 shader = ExtResource("1_p0thj")
-shader_parameter/core_color = Color(1, 1, 0.901961, 1)
-shader_parameter/outer_flame_color = Color(0.980392, 0.443137, 0.027451, 1)
-shader_parameter/smoke_color = Color(1, 0.298039, 0.2, 1)
-shader_parameter/yellow_color = Color(1, 1, 0.313726, 1)
-shader_parameter/noise_tex1 = SubResource("NoiseTexture2D_2utrf")
-shader_parameter/noise_tex2 = SubResource("NoiseTexture2D_f2hsi")
+shader_parameter/yellow_color = Color(0.952941, 0.733333, 0, 1)
+shader_parameter/orange_color = Color(0.831373, 0.545098, 0, 1)
+shader_parameter/effect_speed = 0.1
 
 [node name="MainScene" type="Node2D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_5mwe5")
-
 [node name="RocketEffectShader" type="Sprite2D" parent="."]
 self_modulate = Color(34.677, 14.516, 19.086, 1)
-material = SubResource("ShaderMaterial_hyv84")
-position = Vector2(490, 351.029)
+material = SubResource("ShaderMaterial_ccllo")
+position = Vector2(595, 331)
 scale = Vector2(1.99137, 4.51517)
+texture = ExtResource("2_subrq")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(302, 189)
 texture = ExtResource("2_subrq")
