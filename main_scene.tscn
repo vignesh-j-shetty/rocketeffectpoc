@@ -9,9 +9,9 @@
 [sub_resource type="Environment" id="Environment_pepoh"]
 background_mode = 3
 glow_enabled = true
-glow_intensity = 1.85
-glow_strength = 1.17
-glow_bloom = 0.04
+glow_intensity = 1.22
+glow_strength = 1.19
+glow_bloom = 0.05
 glow_blend_mode = 0
 glow_hdr_threshold = 0.8
 glow_hdr_scale = 1.22
@@ -34,7 +34,7 @@ noise = SubResource("FastNoiseLite_v1yr8")
 shader = ExtResource("1_kblq5")
 shader_parameter/yellow_color = Color(113.298, 0.72549, 0.207843, 1)
 shader_parameter/orange_color = Color(0.92549, 0.552941, 0.0156863, 1)
-shader_parameter/effect_speed = 0.1
+shader_parameter/effect_speed = 1.0
 shader_parameter/flame_height = 1.2
 shader_parameter/noise_tex1 = SubResource("NoiseTexture2D_v8lox")
 shader_parameter/noise_tex2 = SubResource("NoiseTexture2D_860rl")
