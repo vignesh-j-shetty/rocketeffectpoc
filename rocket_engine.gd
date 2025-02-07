@@ -7,6 +7,6 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var h = lerp(1.45, 1.6, randf())
 	shader_material.set_shader_parameter("flame_height", h)

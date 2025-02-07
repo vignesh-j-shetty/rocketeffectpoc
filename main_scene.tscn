@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsm3hbw75h5ty"]
+[gd_scene load_steps=13 format=3 uid="uid://bsm3hbw75h5ty"]
 
 [ext_resource type="Script" path="res://main_scene.gd" id="1_1eqrk"]
 [ext_resource type="Shader" path="res://RocketEffect.gdshader" id="1_kblq5"]
@@ -9,12 +9,26 @@
 [sub_resource type="Environment" id="Environment_pepoh"]
 background_mode = 3
 glow_enabled = true
-glow_intensity = 0.42
+glow_intensity = 1.85
 glow_strength = 1.17
 glow_bloom = 0.04
 glow_blend_mode = 0
 glow_hdr_threshold = 0.8
 glow_hdr_scale = 1.22
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ig27o"]
+noise_type = 3
+frequency = 0.0295
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_v8lox"]
+noise = SubResource("FastNoiseLite_ig27o")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v1yr8"]
+noise_type = 3
+frequency = 0.002
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_860rl"]
+noise = SubResource("FastNoiseLite_v1yr8")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tuprg"]
 shader = ExtResource("1_kblq5")
@@ -22,10 +36,12 @@ shader_parameter/yellow_color = Color(113.298, 0.72549, 0.207843, 1)
 shader_parameter/orange_color = Color(0.92549, 0.552941, 0.0156863, 1)
 shader_parameter/effect_speed = 0.1
 shader_parameter/flame_height = 1.2
+shader_parameter/noise_tex1 = SubResource("NoiseTexture2D_v8lox")
+shader_parameter/noise_tex2 = SubResource("NoiseTexture2D_860rl")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fkvmp"]
 shader = ExtResource("4_uif7i")
-shader_parameter/sigma = 10.2
+shader_parameter/sigma = 120.0
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_1eqrk")
@@ -48,6 +64,6 @@ texture = ExtResource("2_5u1f7")
 metadata/_edit_lock_ = true
 
 [node name="Icon" type="Sprite2D" parent="."]
-modulate = Color(0.5, 0.5, 0.5, 1)
+modulate = Color(0.698039, 0.698039, 0.698039, 1)
 position = Vector2(153, 284)
 texture = ExtResource("2_5u1f7")

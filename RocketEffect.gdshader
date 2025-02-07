@@ -39,7 +39,9 @@ void fragment() {
 	} else if(main_flame > 0.7 && main_flame < 0.9) {
 		float s = smoothstep(0.1, 0.3, main_flame);
 		color = mix(yellow_color, orange_color, s);
-		//color = vec3(1.0);
+	}
+	if(UV.y > 0.7) {
+		float flame = get_flame_noise(UV);
 	}
 	COLOR.rgb = color;
 	COLOR.a = 1.0 - main_flame;
