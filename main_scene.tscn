@@ -1,23 +1,53 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsm3hbw75h5ty"]
+[gd_scene load_steps=9 format=3 uid="uid://bsm3hbw75h5ty"]
 
-[ext_resource type="Shader" path="res://RocketEffect.gdshader" id="1_p0thj"]
-[ext_resource type="Texture2D" uid="uid://doaq5aje84o8g" path="res://icon.svg" id="2_subrq"]
+[ext_resource type="Script" path="res://main_scene.gd" id="1_1eqrk"]
+[ext_resource type="Shader" path="res://RocketEffect.gdshader" id="1_kblq5"]
+[ext_resource type="Texture2D" uid="uid://doaq5aje84o8g" path="res://icon.svg" id="2_5u1f7"]
+[ext_resource type="Script" path="res://rocket_engine.gd" id="4_5d3g6"]
+[ext_resource type="Shader" path="res://blur_test.gdshader" id="4_uif7i"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ccllo"]
-shader = ExtResource("1_p0thj")
-shader_parameter/yellow_color = Color(0.952941, 0.733333, 0, 1)
-shader_parameter/orange_color = Color(0.831373, 0.545098, 0, 1)
+[sub_resource type="Environment" id="Environment_pepoh"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.42
+glow_strength = 1.17
+glow_bloom = 0.04
+glow_blend_mode = 0
+glow_hdr_threshold = 0.8
+glow_hdr_scale = 1.22
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tuprg"]
+shader = ExtResource("1_kblq5")
+shader_parameter/yellow_color = Color(113.298, 0.72549, 0.207843, 1)
+shader_parameter/orange_color = Color(0.92549, 0.552941, 0.0156863, 1)
 shader_parameter/effect_speed = 0.1
+shader_parameter/flame_height = 1.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fkvmp"]
+shader = ExtResource("4_uif7i")
+shader_parameter/sigma = 10.2
 
 [node name="MainScene" type="Node2D"]
+script = ExtResource("1_1eqrk")
 
-[node name="RocketEffectShader" type="Sprite2D" parent="."]
-self_modulate = Color(34.677, 14.516, 19.086, 1)
-material = SubResource("ShaderMaterial_ccllo")
-position = Vector2(595, 331)
-scale = Vector2(1.99137, 4.51517)
-texture = ExtResource("2_subrq")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pepoh")
+
+[node name="RocketEngine" type="Sprite2D" parent="."]
+modulate = Color(100, 0, 0, 1)
+material = SubResource("ShaderMaterial_tuprg")
+position = Vector2(602, 341)
+scale = Vector2(1.98438, 3.74219)
+texture = ExtResource("2_5u1f7")
+script = ExtResource("4_5d3g6")
+
+[node name="blurEffect" type="Sprite2D" parent="RocketEngine"]
+modulate = Color(100, 0, 0, 1)
+material = SubResource("ShaderMaterial_fkvmp")
+texture = ExtResource("2_5u1f7")
+metadata/_edit_lock_ = true
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(302, 189)
-texture = ExtResource("2_subrq")
+modulate = Color(0.5, 0.5, 0.5, 1)
+position = Vector2(153, 284)
+texture = ExtResource("2_5u1f7")
