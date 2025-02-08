@@ -7,7 +7,7 @@ uniform vec3 yellow_color: source_color;
 uniform vec3 orange_color: source_color;
 uniform vec3 smoke_color: source_color;
 uniform float effect_speed = 2.8;
-
+uniform float flame_width = 0.25;
 
 // Height controls
 uniform float flame_height = 1.0;
@@ -39,18 +39,18 @@ float get_flame_noise(vec2 uv) {
 
 
 void fragment() {
-	float main_flame = ellipse(UV, 0.25, flame_height);
-	float smoke_flame = ellipse(UV, 0.25, flame_height + 0.4);
+	float main_flame = ellipse(UV, flame_width, flame_height);
+	float smoke_flame = ellipse(UV, flame_width, flame_height * 1.65);
 	vec3 color = orange_color;
-	if(main_flame < (flame_height - 0.5)) {
-		color = yellow_color;
-	}
+	float yellow_mix_factor = smoothstep(0.0, 0.4, 1.0 - main_flame);
+	color =  mix(color, yellow_color, yellow_mix_factor);
 
-	float alpha = 1.0 - smoke_flame;
 	vec3 smoke = smoke_color * get_flame_noise(UV);
 	float smoke_mix_factor = smoothstep(0.4, 1.2, 1.0 - UV.y);
 	vec3 mixed_smoke = mix(smoke, color, smoke_mix_factor);
 
 	COLOR.rgb = mixed_smoke;
-	COLOR.a = alpha;
+	float main_flame_alpha = smoothstep(0.0, 0.8, 1.0 - main_flame);
+	float smoke_flame_alpha = smoothstep(0.0, 3.0, 1.0 - smoke_flame);
+	COLOR.a = main_flame_alpha + smoke_flame_alpha;
 }
