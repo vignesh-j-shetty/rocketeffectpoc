@@ -9,12 +9,12 @@ var noise_freq = 0.0268
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	shader_material = self.material as ShaderMaterial
-	var texture = NoiseTexture2D.new()
+	var noise_texture = NoiseTexture2D.new()
 	fast_lite_noise = FastNoiseLite.new()
 	fast_lite_noise.frequency = noise_freq
-	texture.noise = fast_lite_noise
-	await texture.changed
-	shader_material.set_shader_parameter("noise_tex1", texture)
+	noise_texture.noise = fast_lite_noise
+	await noise_texture.changed
+	shader_material.set_shader_parameter("noise_tex1", noise_texture)
 	set_process_input(false)
 
 
@@ -35,7 +35,7 @@ func process_input() -> void:
 		control_flame(-1)
 		
 func control_flame(dir):
-	flame_height =  clamp(flame_height + (0.05 * dir), 0.5, 1.6)
+	flame_height =  clamp(flame_height + (0.05 * dir), 0.5, 1.9)
 	smoke_speed = clamp(smoke_speed + (0.05 * dir), 1.8, 2.2)
 	if flame_height < 0.9:
 		noise_freq = 0.0

@@ -2,12 +2,12 @@ shader_type canvas_item;
 
 uniform sampler2D noise_tex1: repeat_enable;
 uniform sampler2D noise_tex2: repeat_enable;
-
 uniform vec3 yellow_color: source_color;
 uniform vec3 orange_color: source_color;
 uniform vec3 smoke_color: source_color;
 uniform float effect_speed = 2.8;
-uniform float flame_width = 0.25;
+const float flame_width = 0.55;
+
 
 // Height controls
 uniform float flame_height = 1.0;
@@ -51,6 +51,6 @@ void fragment() {
 
 	COLOR.rgb = mixed_smoke;
 	float main_flame_alpha = smoothstep(0.0, 0.8, 1.0 - main_flame);
-	float smoke_flame_alpha = smoothstep(0.0, 3.0, 1.0 - smoke_flame);
+	float smoke_flame_alpha = smoothstep(0.0, 6.0, 1.0 - smoke_flame);
 	COLOR.a = main_flame_alpha + smoke_flame_alpha;
 }
