@@ -18,4 +18,5 @@ config/icon="res://icon.svg"
 [rendering]
 
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.259983, 0.267818, 0.513764, 1)
 viewport/hdr_2d=true

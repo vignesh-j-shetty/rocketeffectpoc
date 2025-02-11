@@ -5,7 +5,7 @@ uniform sampler2D noise_tex2: repeat_enable;
 uniform vec3 yellow_color: source_color;
 uniform vec3 orange_color: source_color;
 uniform vec3 smoke_color: source_color;
-uniform float effect_speed = 2.8;
+uniform float effect_speed = 1.8;
 const float flame_width = 0.55;
 
 
